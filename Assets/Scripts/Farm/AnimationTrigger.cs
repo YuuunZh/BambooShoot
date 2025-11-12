@@ -1,22 +1,58 @@
+using System.Collections;
 using UnityEngine;
 
 public class AnimationTrigger : MonoBehaviour
 {
-    public Animator Animator;
+    public Animator[] ClothAnimatorAni;
+    public Animator NextDayAni;
     public KeyCode key;
+
+    Manger _manger;
+    bool _hasClose=false;
+
+
     void Start()
     {
-        Animator=GetComponent<Animator>();
+        _manger = GameObject.Find("Farm(DoNotChangeContant)").GetComponent<Manger>();
 
+        ClothAnimatorAni[0].SetTrigger("Go");
+        ClothAnimatorAni[1].SetTrigger("Go");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (Input.GetKeyDown(key) && !_hasClose)
         {
-            Animator.SetTrigger("Go");
-            print("yes");
+            _hasClose = true;
+            ClothAnimatorAni[0].SetTrigger("Back");
+            ClothAnimatorAni[1].SetTrigger("Back");
+
+            StartCoroutine(NextDayUI());
         }
+
+        //次日UI自己下來
+        if (_manger.countTime > _manger.Day01Time + 1.5f && !_hasClose)
+        {
+            _hasClose = true;
+            StartCoroutine(NextDayUI());
+        }
+    }
+
+    IEnumerator NextDayUI()
+    {
+        _manger.Day01 = false;
+        NextDayAni.SetTrigger("Down");
+
+        yield return new WaitForSeconds(3);
+
+        NextDayAni.SetTrigger("Up");
+
+        yield return new WaitForSeconds(1);   //第二日開布
+
+        _manger.Day02 = true;
+        _manger.Daytimer.fillAmount = 0;
+        ClothAnimatorAni[0].SetTrigger("Go");
+        ClothAnimatorAni[1].SetTrigger("Go");
     }
 }

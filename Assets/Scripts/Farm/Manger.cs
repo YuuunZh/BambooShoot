@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,9 +40,16 @@ public class Manger : MonoBehaviour
         [Header("操作空間設定抓取")]
         public GameObject Bamboo;
         public KeyCode key;
-        public Image OutlineRenderer,OutlineFill,StateSpRender;   //狀態列相關空間
+        public Image StateSpRender,OutlineFill;   //狀態列相關空間
         //public float timeCunt=0;
 
+    }
+
+    [System.Serializable]
+    public class LevelData
+    {
+        public string Level;
+        public Sprite Type;
     }
 
 
@@ -62,28 +68,31 @@ public class Manger : MonoBehaviour
     bool gameStop=false, hasFilled = false;    //hasFilled:UIStateFill
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
     void Start()
     {
 
         bambooNum = gameObject.transform.childCount;
+
         //物件基本設定抓取。資料初始化
         for (int i = 0; i < bambooNum; i++)
         {
             Bamboos[i].Bamboo = transform.GetChild(i).gameObject;  //抓竹筍本人物件
             Bamboos[i].bambooForm = transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>();  //抓竹筍本人的Sp
-            Bamboos[i].OutlineRenderer = canvas.transform.GetChild(i).
-                gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態框
+            Bamboos[i].StateSpRender = canvas.transform.GetChild(i).
+                gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態
             Bamboos[i].OutlineFill = canvas.transform.GetChild(i).GetChild(0).
                 gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態填充
-            Bamboos[i].StateSpRender = canvas.transform.GetChild(i).GetChild(1).
-                gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態圖
             Bamboos[i].timeToWatered = UnityEngine.Random.Range(3, 6);
-            Bamboos[i].timeToSpread = UnityEngine.Random.Range(1,4);
+            Bamboos[i].timeToSpread = UnityEngine.Random.Range(1, 4);
             Bamboos[i].timeToSpread += waitTime + Bamboos[i].timeToWatered;   //真正施肥時間
+            Bamboos[i].bambooForm.sprite = bambooSpForm[0];
         }
 
-        for(int i=0 ; i<canvas.transform.childCount;i++)   //關一下
+
+        //關一下
+        for (int i=0 ; i<canvas.transform.childCount;i++)   
         {
             canvas.transform.GetChild(i).gameObject.SetActive(false);
         }
@@ -111,7 +120,8 @@ public class Manger : MonoBehaviour
                     {
                         Bamboos[i].requiredWatered = true;
                         Bamboos[i].StateSpRender.sprite = stateSpForm[0];
-                        Bamboos[i].OutlineRenderer.gameObject.SetActive(true);
+                        Bamboos[i].OutlineFill.sprite = stateSpForm[0];
+                        Bamboos[i].StateSpRender.gameObject.SetActive(true);
                     }
 
                     //操作時間
@@ -130,7 +140,7 @@ public class Manger : MonoBehaviour
                         if (Input.GetKeyDown(Bamboos[i].key) && !Bamboos[i].hasWatered)   //澆水了
                         {
                             Bamboos[i].hasWatered = true;
-                            Bamboos[i].OutlineRenderer.gameObject.SetActive(false);
+                            Bamboos[i].StateSpRender.gameObject.SetActive(false);
                             Bamboos[i].bambooFormIndex += 1;
                             Bamboos[i].bambooForm.sprite = bambooSpForm[Bamboos[i].bambooFormIndex];
                         }
@@ -143,6 +153,8 @@ public class Manger : MonoBehaviour
                         Bamboos[i].isWatering = false;
                     #endregion
 
+
+
                     #region SpreadProcess
                     //要求施肥
                     if (!Bamboos[i].requiredSpread &&
@@ -150,7 +162,8 @@ public class Manger : MonoBehaviour
                     {
                         Bamboos[i].requiredSpread = true;
                         Bamboos[i].StateSpRender.sprite = stateSpForm[1];
-                        Bamboos[i].OutlineRenderer.gameObject.SetActive(true);
+                        Bamboos[i].OutlineFill.sprite = stateSpForm[1];
+                        Bamboos[i].StateSpRender.gameObject.SetActive(true);
                         hasFilled = false;
                     }
 
@@ -167,7 +180,7 @@ public class Manger : MonoBehaviour
                         if (Input.GetKeyDown(Bamboos[i].key) && !Bamboos[i].hasSpread)   //施肥了
                         {
                             Bamboos[i].hasSpread = true;
-                            Bamboos[i].OutlineRenderer.gameObject.SetActive(false);
+                            Bamboos[i].StateSpRender.gameObject.SetActive(false);
                             Bamboos[i].bambooFormIndex += 1;
                             Bamboos[i].bambooForm.sprite = bambooSpForm[Bamboos[i].bambooFormIndex];
                         }

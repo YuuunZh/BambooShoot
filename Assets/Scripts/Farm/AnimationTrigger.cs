@@ -47,10 +47,10 @@ public class AnimationTrigger : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         NextDayAni.SetTrigger("Up");
-
-        yield return new WaitForSeconds(1);   //第二日開布
-
         _manger.Day02 = true;
+
+        yield return new WaitForSeconds(2);   //第二日開布
+
         _manger.Daytimer.fillAmount = 0;
         ClothAnimatorAni[0].SetTrigger("Go");
         ClothAnimatorAni[1].SetTrigger("Go");

@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 42582064}
   - component: {fileID: 42582063}
   m_Layer: 0
-  m_Name: Manger
+  m_Name: Manger(DDoL)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

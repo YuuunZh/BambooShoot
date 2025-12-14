@@ -8,7 +8,13 @@ public class BambooStyleData : ScriptableObject
     public Sprite StyleSprite;      // 造型圖片
     public Sprite StyleForDiary;
     public Sprite OriginalPlace;
+    public Sprite Grade;
+    
+    public string Breif;            // 簡介產地
+    public string Personality;      // 左下_個性
+    public string Characteristic;   // 左下_特徵
+    public string ReasonShowUp;     // 左下_出現原因
     [TextArea]
-    public string Introduction;     // 造型介紹/青農日記內容
-    public string Level;            // 所屬等級 (e.g., "SSS", "SR")
+    public string PlaceIntro;       // 右下_地點介紹
+    public string Level;            // 所屬等級
 }

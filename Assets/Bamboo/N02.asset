@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: N02
   m_EditorClassIdentifier: 
-  StyleName: N02
+  StyleName: "\u4E5F\u5F88\u4E00\u822C"
   StyleID: N_02
   StyleSprite: {fileID: -3743048824112130044, guid: f154f086fe97d48489e93f640cde596a, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: N02
+  StyleForDiary: {fileID: -3743048824112130044, guid: f154f086fe97d48489e93f640cde596a, type: 3}
+  OriginalPlace: {fileID: 2061219240541987770, guid: 91d867a5df984ff48971723f508354a1, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: "\u6597\u5357"
+  Personality: "\u4E5F\u662F\u4E00\u822C\u822C"
+  Characteristic: "\u4E00\u822C\u5F97\u5F88\u4E00\u822C"
+  ReasonShowUp: "\u597D\u5403"
+  PlaceIntro: "\u8DDF\u4E00\u822C\u7AF9\u7B4D\u4E00\u6A23"
   Level: N

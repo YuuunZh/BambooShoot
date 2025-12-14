@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: R01
   m_EditorClassIdentifier: 
-  StyleName: R01
+  StyleName: "\u4E0D\u932F"
   StyleID: R_01
   StyleSprite: {fileID: -3714035708598517889, guid: 159c9faa296e4e8418c930c30bd8ef03, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: RRRRR
+  StyleForDiary: {fileID: -3714035708598517889, guid: 159c9faa296e4e8418c930c30bd8ef03, type: 3}
+  OriginalPlace: {fileID: -4418764087771579734, guid: 515b8846ab65db946be673568b302d9e, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: 
+  Personality: 
+  Characteristic: 
+  ReasonShowUp: 
+  PlaceIntro: 
   Level: R

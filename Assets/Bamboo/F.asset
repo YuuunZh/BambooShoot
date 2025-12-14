@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: F
   m_EditorClassIdentifier: 
-  StyleName: F
+  StyleName: "\u62C9\u4E0B\u53BB"
   StyleID: F
   StyleSprite: {fileID: -1212320395597898711, guid: 0755614f86618084299974cb20d3bdcf, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: 'F(ugly) Bamboo for test '
+  StyleForDiary: {fileID: -1212320395597898711, guid: 0755614f86618084299974cb20d3bdcf, type: 3}
+  OriginalPlace: {fileID: 6129350190956564882, guid: 5f330a47f3206fe48bd7b69f273c5388, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: "\u4E0D\u77E5\u9053"
+  Personality: "\u6C92\u4EC0\u9EBC"
+  Characteristic: "\u4E0D\u592A\u597D\u770B"
+  ReasonShowUp: "\u9577\u7684\u6709\u9EDE\u5931\u8AA4"
+  PlaceIntro: "\u964F\u51FA\u53EF\u898B\uFF0C\u597D\u50CF\u662F\u6210\u9577\u904E\u7A0B\u4E2D\u6709\u9EDE\u5931\u8AA4\u7684\u6A23\u5B50"
   Level: F

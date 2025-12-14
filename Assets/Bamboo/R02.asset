@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: R02
   m_EditorClassIdentifier: 
-  StyleName: R02
+  StyleName: "\u597D\u5594"
   StyleID: R_02
   StyleSprite: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: RRRRR
+  StyleForDiary: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
+  OriginalPlace: {fileID: -14726804602127102, guid: c2897009766186a4aa78ef973aee59c5, type: 3}
+  Grade: {fileID: 0}
+  Breif: 
+  Personality: 
+  Characteristic: 
+  ReasonShowUp: 
+  PlaceIntro: 
   Level: R

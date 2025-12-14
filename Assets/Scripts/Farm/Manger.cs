@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Linq;
 
 /// <summary>
 /// 竹筍本人與狀態的顯示與動作
 /// 主遊戲的狀態顯示與讀條
 /// 竹筍跳澆水&施肥
-/// 
-/// ------------未做------------
-/// 竹筍跨日採收
 /// 不同竹筍的生成抽獎
 /// 醜損判定
-/// 遊戲暫停
-/// 青農日記
-/// 結算日
+/// 竹筍跨日採收
+/// 去分級
 /// 
 /// </summary>
+
 
 public class Manger : MonoBehaviour
 {
@@ -36,6 +35,7 @@ public class Manger : MonoBehaviour
         public bool isSpreaing = false;
         public bool hasHarvest =false;  //爲未來要新增清晨採收暫留
         public bool stateIsFilling = false;    //避免操作時間一直去觸發協程
+        public bool Day02Initialized = false;   //第2日初始化，是否抽獎
 
         [Header("操作空間設定抓取")]
         public GameObject Bamboo;
@@ -56,7 +56,7 @@ public class Manger : MonoBehaviour
     /*---------------------------*/
     [Header("竹筍資料庫與進度追蹤")]
     public BambooLevelStyleList StyleListDB; // 拖曳 BambooStyleList ScriptableObject 進來
-    private PlayerProgressData _playerProgress;
+    
     /*---------------------------*/
 
 
@@ -65,22 +65,19 @@ public class Manger : MonoBehaviour
     public GameObject canvas;
     public Image Daytimer;
     public bool Day01=true,Day02=false;
+    public string NextScene;
 
-    
+
+
     public float countTime = 0, Day01Time = 15;    //Day01Time:第一天只給15秒動作
     public bool Day01HadCover=false;
+    public Animator ToGtadingAni;
 
     int waitTime = 3,HarvestTime=8;   //waitTime:每個澆水&施肥動作只給3秒 ; HarvestTime:採收只給8秒動作
     float bambooNum,HarvestDay;
     bool gameStop=false, hasFilled = false;    //hasFilled:UIStateFill
 
-    void Awake()
-    {
-        // 載入玩家進度 (請自行實現 LoadProgressFromSaveFile 或 PlayerPrefs)
-        _playerProgress = LoadPlayerProgress();
-    }
-
-
+    
     void Start()
     {
 
@@ -94,7 +91,7 @@ public class Manger : MonoBehaviour
             Bamboos[i].StateSpRender = canvas.transform.GetChild(i).
                 gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態
             Bamboos[i].OutlineFill = canvas.transform.GetChild(i).GetChild(0).
-                gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態填充
+                gameObject.GetComponent<Image>();  //抓竹筍子物件的狀態填充 
             Bamboos[i].timeToWatered = UnityEngine.Random.Range(3, 6);
             Bamboos[i].timeToSpread = UnityEngine.Random.Range(1, 4);
             Bamboos[i].timeToSpread += waitTime + Bamboos[i].timeToWatered;   //真正施肥時間
@@ -215,8 +212,7 @@ public class Manger : MonoBehaviour
                 for(int i=0; i < bambooNum; i++)
                 {
                     // 進入 Day02 時，先進行抽獎判定
-                    // 為了避免重複抽選，我們使用 hasWatered 旗標作為 Day02 初始化的標記
-                    if (!Bamboos[i].hasWatered)
+                    if (!Bamboos[i].Day02Initialized)
                     {
                         // 執行抽獎，並取得抽到的竹筍造型資料
                         BambooStyleData harvestedStyle = PerformLottery(Bamboos[i]);
@@ -226,72 +222,62 @@ public class Manger : MonoBehaviour
                             // **設定竹筍的最終造型！**
                             Bamboos[i].bambooForm.sprite = harvestedStyle.StyleSprite;
 
+
                             // 使用 hasWatered 來標記該竹筍已完成 Day02 的初始抽獎，避免重複抽
-                            Bamboos[i].hasWatered = true;
+                            Bamboos[i].Day02Initialized = true;
                         }
                         else
                         {
                             // 如果抽獎失敗，設一個預設或錯誤造型
                             Bamboos[i].bambooForm.sprite = bambooSpForm[0];
+                            Bamboos[i].Day02Initialized = true;
                         }
                     }
 
                     if (!Bamboos[i].hasHarvest && Input.GetKeyDown(Bamboos[i].key))
                     {
                         Bamboos[i].hasHarvest=true;
+
+                        // 【修改】：取消直接隱藏，改為啟動動畫協程
+                        StartCoroutine(HarvestAnimation(
+                            Bamboos[i].Bamboo,        // 竹筍的 GameObject
+                            Bamboos[i].bambooForm     // 竹筍的 SpriteRenderer
+                        ));
+
+                        // 隱藏 State UI，表示該竹筍已完成採收
+                        // 由於 State UI 和竹筍是不同的物件，UI 可以直接隱藏
+                        Bamboos[i].StateSpRender.gameObject.SetActive(false);
                     }
                 }
 
+                if (IsHarvestComplete() && Input.GetKeyDown(KeyCode.Space))
+                {
+                    Debug.Log("Day02 採收完畢，切換到下一個場景: " + NextScene);
+                    // 執行場景切換
+                    StartCoroutine(TransitionToGrading());
+                }
 
             }
 
         }
     }
 
-    /*
-    string bambooLevel(bambooData bamboo)
-    {
-        if (!Day01HadCover)
-        {
-            return "F";
-        }
-
-        bool bothDone = bamboo.hasWatered && bamboo.hasSpread;
-        int lottery = Random.Range(1, 101);
-
-        if (bothDone)
-        {
-            if (lottery <= 5)
-                return "SSS";
-            else if (lottery <= 15)
-                return "SSR";
-            else if (lottery <= 50)
-                return "SR";
-            else if (lottery <= 90)
-                return "R";
-            return "N";
-        }
-        else
-        {
-            if (lottery <= 5)
-                return "SR";
-            else if (lottery <= 35)
-                return "R";
-            else if (lottery <= 85)
-                return "N";
-            return "F";
-            
-        }
-
-    }
-
-    */
 
     /*-----------------------------------------------------------------------------*/
 
     public BambooStyleData PerformLottery(bambooData bamboo)
     {
         string level;
+        // 確保 DDoL Manager 存在
+        if (ProgressTransferManager.Instance == null)
+        {
+            Debug.LogError("ProgressTransferManager 未找到。無法進行抽獎和存檔。");
+            return null;
+        }
+
+        // 從 DDoL 實例取得永久進度
+        PlayerProgressData playerProgress = ProgressTransferManager.Instance.PlayerProgress;
+
         // 1. 判斷竹筍等級
         if (!Day01HadCover)
         {
@@ -307,7 +293,7 @@ public class Manger : MonoBehaviour
             {
                 if (lottery <= 5) level = "SSS";
                 else if (lottery <= 15) level = "SSR";
-                else if (lottery <= 50) level = "SR";
+                else if (lottery <= 40) level = "SR";
                 else if (lottery <= 90) level = "R";
                 else level = "N";
             }
@@ -330,17 +316,23 @@ public class Manger : MonoBehaviour
             BambooStyleData selectedStyle = availableStyles[randomIndex];
 
             // 3. 檢查並解鎖造型 (更新玩家進度)
-            if (!_playerProgress.IsStyleUnlocked(selectedStyle.StyleID))
+            if (!playerProgress.IsStyleUnlocked(selectedStyle.StyleID))
             {
-                _playerProgress.UnlockStyle(selectedStyle.StyleID);
+                playerProgress.UnlockStyle(selectedStyle.StyleID);
                 Debug.Log($"🎉 Day02 發現新造型! 等級:{level}, 造型名稱: {selectedStyle.StyleName}");
                 // 注意：存檔會在遊戲關閉/暫停時自動執行 (根據前一次討論的 OnApplicationQuit/OnApplicationPause)
+                
+                // 新增 DDoL Manager 存檔呼叫
+                ProgressTransferManager.Instance.SavePlayerProgress(playerProgress);
+
             }
             else
             {
                 Debug.Log($"Day02 抽到已解鎖造型: {selectedStyle.StyleName}");
             }
 
+            //  寫入 DDoL Manager 進行跨場景傳遞
+            ProgressTransferManager.Instance.Day02HarvestedBamboos.Add(selectedStyle);
             return selectedStyle;
         }
         else
@@ -351,30 +343,6 @@ public class Manger : MonoBehaviour
     }
 
     /*-----------------------------------------------------------------------------*/
-
-
-    int bambooLottery(string level)
-    {
-        int roll = Random.Range(1, 101);
-        switch (level)
-        {
-            case "SSS":
-
-                break;
-            case "SSR":
-                break;
-            case "SR":
-                break;
-            case "R":
-                break;
-            case "N":
-                break;
-            case "F":
-                break;
-        }
-        return 0;
-    }
-
 
 
 
@@ -438,79 +406,93 @@ public class Manger : MonoBehaviour
 
 
     /*--------------------------------------------------------------------------*/
-    // 用來處理抽獎和解鎖的方法
-    public BambooStyleData PerformLotteryAndUnlock(string level)
-    {
-        // 1. 取得該等級所有造型
-        var styles = StyleListDB.GetStylesByLevel()[level];
+    
+    
 
-        if (styles == null || styles.Count == 0)
+    // Day02 開始時，設定 UI 為採收模式。
+    public void StartDay02HarvestUI()
+    {
+        // 設定所有竹筍的狀態 UI
+        for (int i = 0; i < bambooNum; i++)
         {
-            Debug.LogError($"Level {level} has no defined styles.");
-            return null;
+            // 1. State 的 UI 出現
+            Bamboos[i].StateSpRender.gameObject.SetActive(true);
+
+            // 2. stateSpForm要是第3個 (stateSpForm[2])
+            Bamboos[i].StateSpRender.sprite = stateSpForm[2];
+            Bamboos[i].OutlineFill.sprite = stateSpForm[2];
+
+            // 確保 Day02 狀態列的填充條為滿
+            Bamboos[i].OutlineFill.fillAmount = 0f;
+        }
+    }
+
+    IEnumerator HarvestAnimation(GameObject bambooObject, SpriteRenderer spriteRenderer, float moveDistance = 1.0f, float duration = 0.5f)
+    {
+        Vector3 startPosition = bambooObject.transform.position;
+        Vector3 endPosition = startPosition + Vector3.up * moveDistance;
+        Color startColor = spriteRenderer.color;
+        float startTime = Time.time;
+
+        // 動畫迴圈
+        while (Time.time < startTime + duration)
+        {
+            float t = (Time.time - startTime) / duration;
+
+            // 1. 位移：使用 Ease Out 效果讓移動更自然（t*t*t*t 可以替換成 t*t*t 甚至 Linear (t)）
+            bambooObject.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+
+            // 2. 淡出：調整 SpriteRenderer 的 alpha 值
+            Color newColor = startColor;
+            newColor.a = Mathf.Lerp(1f, 0f, t);
+            spriteRenderer.color = newColor;
+
+            yield return null; // 等待下一幀
         }
 
-        // 2. 隨機抽出一個造型
-        int randomIndex = Random.Range(0, styles.Count);
-        BambooStyleData selectedStyle = styles[randomIndex];
+        // 動畫結束，確保物件隱藏
+        bambooObject.SetActive(false);
 
-        // 3. 判斷是否為新解鎖，並更新進度
-        bool isNewUnlock = !_playerProgress.IsStyleUnlocked(selectedStyle.StyleID);
+        // 重設 SpriteRenderer 顏色，以備下次使用（如果竹筍物件會被重用）
+        spriteRenderer.color = startColor;
+    }
 
-        if (isNewUnlock)
+    bool IsHarvestComplete()
+    {
+        for (int i = 0; i < bambooNum; i++)
         {
-            _playerProgress.UnlockStyle(selectedStyle.StyleID);
-            // 儲存玩家進度 (請自行實現 SaveProgressToSaveFile 或 PlayerPrefs)
-            SavePlayerProgress(_playerProgress);
+            if (!Bamboos[i].hasHarvest)
+            {
+                return false; // 只要有一個還沒採收就回傳 false
+            }
+        }
+        return true; // 所有竹筍都採收完畢
+    }
 
-            // 可以觸發UI顯示 "New Unlock!"
-            Debug.Log($"🎉 新造型解鎖: {selectedStyle.StyleName}");
+    // Day02 結束時的過場動畫及場景切換
+    IEnumerator TransitionToGrading()
+    {
+        AnimationTrigger animTrigger = FindObjectOfType<AnimationTrigger>();
+
+        if (animTrigger != null)
+        {
+            // 1. 執行蓋布動畫
+            animTrigger.ClothAnimatorAni[0].SetTrigger("Back");
+            animTrigger.ClothAnimatorAni[1].SetTrigger("Back");
+            ToGtadingAni.SetTrigger("Grading");
+
+            // 2. 等待 2 秒讓動畫執行完畢
+            yield return new WaitForSeconds(1.5f);
         }
         else
         {
-            Debug.Log($"已獲得造型: {selectedStyle.StyleName}");
+            Debug.LogError("無法找到 AnimationTrigger 腳本，跳過過場動畫。");
         }
 
-        return selectedStyle;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(NextScene);
     }
 
-    /*
-    // 假設您在 Day02 採收時呼叫此方法
-    void Day02HarvestLogic(bambooData bamboo)
-    {
-        string level = bambooLevel(bamboo); // 呼叫您既有的等級判定
-        BambooStyleData harvestedStyle = PerformLotteryAndUnlock(level);
 
-        // 使用 harvestedStyle 的資料來更新竹筍顯示或進入結算畫面
-        if (harvestedStyle != null)
-        {
-            // 將竹筍 Sprite 設為抽到的造型
-            bamboo.bambooForm.sprite = harvestedStyle.StyleSprite;
-        }
-
-        // ... (其他 Day02 邏輯)
-    }
-    */
-    // 存檔/讀檔的 Placeholder (您需要根據您的專案選擇實現方式)
-    private PlayerProgressData LoadPlayerProgress()
-    {
-        // 範例：從 PlayerPrefs 讀取 JSON 字符串
-        string json = PlayerPrefs.GetString("PlayerProgress", "{}");
-        try
-        {
-            return JsonUtility.FromJson<PlayerProgressData>(json);
-        }
-        catch
-        {
-            return new PlayerProgressData();
-        }
-    }
-    private void SavePlayerProgress(PlayerProgressData data)
-    {
-        string json = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString("PlayerProgress", json);
-        PlayerPrefs.Save();
-    }
     /*--------------------------------------------------------------------------*/
 
 }

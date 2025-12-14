@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: N01
   m_EditorClassIdentifier: 
-  StyleName: N01
+  StyleName: "\u4E00\u822C\u822C"
   StyleID: N_01
   StyleSprite: {fileID: 5804238425491024656, guid: 60393ce867a93f543ad5f42ea346a3e4, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: N
+  StyleForDiary: {fileID: 5804238425491024656, guid: 60393ce867a93f543ad5f42ea346a3e4, type: 3}
+  OriginalPlace: {fileID: -4418764087771579734, guid: 515b8846ab65db946be673568b302d9e, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: "\u5230\u8655\u90FD\u6709"
+  Personality: "NPC\u3001\u5F88\u4E00\u822C"
+  Characteristic: "\u5C31...\u7AF9\u7B4D"
+  ReasonShowUp: "\u964Fr\u7269\u53EF\u898B\uFF0C\u53EF\u4EE5\u5403"
+  PlaceIntro: "\u6597\u5357\u7279\u6709\u90FD\u6709\u7684\u597D\u5403\u7AF9\u7B4D\uFF0C\u4E0D\u4FB7\u9650\u6597\u6597\u5357\u7684\u5730\u9EDE"
   Level: N

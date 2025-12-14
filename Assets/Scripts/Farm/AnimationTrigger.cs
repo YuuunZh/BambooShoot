@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static Manger;
 
 public class AnimationTrigger : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class AnimationTrigger : MonoBehaviour
         if (Input.GetKeyDown(key) && !_hasClose)
         {
             _hasClose = true;
+
+            _manger.Day01HadCover = true;
             ClothAnimatorAni[0].SetTrigger("Back");
             ClothAnimatorAni[1].SetTrigger("Back");
 
@@ -44,15 +47,22 @@ public class AnimationTrigger : MonoBehaviour
         _manger.Day01 = false;
         NextDayAni.SetTrigger("Down");
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         NextDayAni.SetTrigger("Up");
         _manger.Day02 = true;
+        
 
         yield return new WaitForSeconds(2);   //第二日開布
 
         _manger.Daytimer.fillAmount = 0;
         ClothAnimatorAni[0].SetTrigger("Go");
         ClothAnimatorAni[1].SetTrigger("Go");
+
+        yield return new WaitForSeconds(1);   //第二日出UI
+        _manger.StartDay02HarvestUI();
     }
+
+
+
 }

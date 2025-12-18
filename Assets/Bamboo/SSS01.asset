@@ -15,7 +15,12 @@ MonoBehaviour:
   StyleName: SSS01
   StyleID: SSS_01
   StyleSprite: {fileID: -4945623751534705981, guid: 65aa7aaea48b63f459d34f45860e1e7e, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: SSS Bamboo for test 01
+  StyleForDiary: {fileID: -4945623751534705981, guid: 65aa7aaea48b63f459d34f45860e1e7e, type: 3}
+  OriginalPlace: {fileID: -4786925928855152282, guid: 1c40e8b158887a149b14ecd49db3cd29, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: 
+  Personality: 
+  Characteristic: 
+  ReasonShowUp: 
+  PlaceIntro: 
   Level: SSS

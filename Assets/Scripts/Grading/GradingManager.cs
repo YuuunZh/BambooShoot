@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Linq; // 用於 Linq 排序功能
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 處理 Grading 場景的邏輯：
@@ -87,8 +88,12 @@ public class GradingManager : MonoBehaviour
 
     void Update()
     {
-        // 處理開啟/關閉書本
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Q))
+            SceneManager.LoadScene("Maimboo");
+
+
+            // 處理開啟/關閉書本
+            if (Input.GetKeyDown(KeyCode.L))
         {
             ToggleBookUI();
         }

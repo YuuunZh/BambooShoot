@@ -15,7 +15,12 @@ MonoBehaviour:
   StyleName: SR02
   StyleID: SR_02
   StyleSprite: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: SSS Bamboo for test 01
+  StyleForDiary: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
+  OriginalPlace: {fileID: 106459473394109928, guid: 6c8e208a6d5381f4ba854a8b2ce8f17b, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: 
+  Personality: 
+  Characteristic: 
+  ReasonShowUp: 
+  PlaceIntro: 
   Level: SR

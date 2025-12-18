@@ -15,7 +15,12 @@ MonoBehaviour:
   StyleName: SSR
   StyleID: SSR_01
   StyleSprite: {fileID: -8211722194183007549, guid: d3fc443edf3c375479057672d857bd0e, type: 3}
-  StyleForDiary: {fileID: 0}
-  OriginalPlace: {fileID: 0}
-  Introduction: SSR
+  StyleForDiary: {fileID: -8211722194183007549, guid: d3fc443edf3c375479057672d857bd0e, type: 3}
+  OriginalPlace: {fileID: 6127080594098854375, guid: 9b132f799863013438860e4d41f1335f, type: 3}
+  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  Breif: 307
+  Personality: "#\u611B\u7A0B\u5F0F"
+  Characteristic: "#\u4E00\u8F29\u5B50"
+  ReasonShowUp: "\u8B9A"
+  PlaceIntro: "\u4E0A\u8AB2\u4E0A\u5230\u4E00\u534A\u7A81\u7136\u611B\u7A0B\u5F0F\u7AF9\u7B4D"
   Level: SSR

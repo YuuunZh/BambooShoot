@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: SSR01
   m_EditorClassIdentifier: 
-  StyleName: SSR
+  StyleName: SSR_01
   StyleID: SSR_01
-  StyleSprite: {fileID: -8211722194183007549, guid: d3fc443edf3c375479057672d857bd0e, type: 3}
-  StyleForDiary: {fileID: -8211722194183007549, guid: d3fc443edf3c375479057672d857bd0e, type: 3}
+  StyleSprite: {fileID: 854031037, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleForDiary: {fileID: 854031037, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: 6127080594098854375, guid: 9b132f799863013438860e4d41f1335f, type: 3}
   Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  BoxSprite: {fileID: 21300000, guid: bb9c9dad7e9e7fa4ab124a6924fda388, type: 3}
   Breif: 307
   Personality: "#\u611B\u7A0B\u5F0F"
   Characteristic: "#\u4E00\u8F29\u5B50"

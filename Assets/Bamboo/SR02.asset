@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StyleName: SR02
   StyleID: SR_02
-  StyleSprite: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
-  StyleForDiary: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
+  StyleSprite: {fileID: 527878410, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleForDiary: {fileID: 527878410, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: 106459473394109928, guid: 6c8e208a6d5381f4ba854a8b2ce8f17b, type: 3}
   Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  BoxSprite: {fileID: 21300000, guid: 914adb0d32e239a45b173253b6d98c6a, type: 3}
   Breif: 
   Personality: 
   Characteristic: 

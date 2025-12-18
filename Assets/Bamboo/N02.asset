@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: N02
   m_EditorClassIdentifier: 
-  StyleName: "\u4E5F\u5F88\u4E00\u822C"
+  StyleName: N_02
   StyleID: N_02
-  StyleSprite: {fileID: -3743048824112130044, guid: f154f086fe97d48489e93f640cde596a, type: 3}
-  StyleForDiary: {fileID: -3743048824112130044, guid: f154f086fe97d48489e93f640cde596a, type: 3}
+  StyleSprite: {fileID: 1277633289, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleForDiary: {fileID: 1277633289, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: 2061219240541987770, guid: 91d867a5df984ff48971723f508354a1, type: 3}
   Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  BoxSprite: {fileID: 21300000, guid: 914adb0d32e239a45b173253b6d98c6a, type: 3}
   Breif: "\u6597\u5357"
   Personality: "\u4E5F\u662F\u4E00\u822C\u822C"
   Characteristic: "\u4E00\u822C\u5F97\u5F88\u4E00\u822C"

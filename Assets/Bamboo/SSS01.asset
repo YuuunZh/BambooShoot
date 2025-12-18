@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StyleName: SSS01
   StyleID: SSS_01
-  StyleSprite: {fileID: -4945623751534705981, guid: 65aa7aaea48b63f459d34f45860e1e7e, type: 3}
-  StyleForDiary: {fileID: -4945623751534705981, guid: 65aa7aaea48b63f459d34f45860e1e7e, type: 3}
+  StyleSprite: {fileID: 1348408377, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleForDiary: {fileID: 1348408377, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: -4786925928855152282, guid: 1c40e8b158887a149b14ecd49db3cd29, type: 3}
   Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
+  BoxSprite: {fileID: 21300000, guid: 914adb0d32e239a45b173253b6d98c6a, type: 3}
   Breif: 
   Personality: 
   Characteristic: 

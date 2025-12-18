@@ -9,7 +9,8 @@ public class BambooStyleData : ScriptableObject
     public Sprite StyleForDiary;
     public Sprite OriginalPlace;
     public Sprite Grade;
-    
+    public Sprite BoxSprite; // 該竹筍對應的箱子圖片
+
     public string Breif;            // 簡介產地
     public string Personality;      // 左下_個性
     public string Characteristic;   // 左下_特徵

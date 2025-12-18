@@ -3,14 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq; // 用於 Linq 排序功能
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using System.Collections;
 
 /// <summary>
 /// 處理 Grading 場景的邏輯：
 /// 1. 讀取 Day02 抽到的所有竹筍造型資料。
 /// 2. 處理 UI 互動 (開啟/關閉書本、切換竹筍資料)。
 /// 3. 將竹筍資料顯示在書本 UI 上。
+/// 
+/// 
+/// #待辦注意#
+/// 離開場景要清空DDoL的List
 /// </summary>
 public class GradingManager : MonoBehaviour
 {
@@ -19,6 +24,24 @@ public class GradingManager : MonoBehaviour
 
     // 一個代表未解鎖的 'Unknown' 資料 (請在 Inspector 中設定) ***
     public BambooStyleData UnknownStyleData;
+
+
+    [Header("分級蓋章")]
+    public Image BoxImage;
+    public GameObject NoneBamBoo;
+    public GameObject FinishUI;
+    public Animator BoxAni;
+    public Image[] Stamp;
+    private int stampIndex;
+    private int _gradingIndex = 0;
+    // 定義各等級對應的按鍵
+    private List<BambooStyleData> _harvestedQueue = new List<BambooStyleData>();
+    private Dictionary<string, KeyCode> _gradeKeys = new Dictionary<string, KeyCode> {
+        { "SSS", KeyCode.Y }, { "SSR", KeyCode.U }, { "SR", KeyCode.I }, { "R", KeyCode.O }, { "N", KeyCode.P }
+    };
+    private Dictionary<string, int> _stampAni = new Dictionary<string, int> {
+        { "SSS", 0 }, { "SSR", 1}, { "SR",2 }, { "R", 3 }, { "N",4 }
+    };
 
 
     [Header("UI 設定")]
@@ -43,12 +66,31 @@ public class GradingManager : MonoBehaviour
     public GameObject SwitchTipL; // L 鍵提示
 
 
+
+
     // 儲存從 Manger 讀取到的竹筍資料
     private List<BambooStyleData> _diaryBamboos = new List<BambooStyleData>();
     private int _currentIndex = 0; // 目前顯示的竹筍索引
+    private GameObject DDoLObj;
 
     void Start()
     {
+        DDoLObj = GameObject.Find("Manger(DDoL)");
+        if (DDoLObj == null)
+            Debug.LogError("找不到採收序列");
+
+        // 載入當次採收資料（用於分級，排除 F 等級）
+        _harvestedQueue = ProgressTransferManager.Instance.Day02HarvestedBamboos
+            .Where(b => b.Level != "F").ToList();
+
+        if (_harvestedQueue == null)
+            NoneBamBoo.SetActive(true);
+        else NoneBamBoo.SetActive(false);
+
+        FinishUI.SetActive(false);
+
+        ShowCurrentBox();
+
         // 確保 DDoL Manager 存在
         if (ProgressTransferManager.Instance == null)
         {
@@ -89,11 +131,17 @@ public class GradingManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
+        {
             SceneManager.LoadScene("Maimboo");
 
+            DDoLObj.GetComponent<ProgressTransferManager>().Day02HarvestedBamboos.Clear();
+        }
+        
+        //分級
+        HandleGradingInput();
 
-            // 處理開啟/關閉書本
-            if (Input.GetKeyDown(KeyCode.L))
+        // 處理開啟/關閉書本
+        if (Input.GetKeyDown(KeyCode.L))
         {
             ToggleBookUI();
         }
@@ -122,6 +170,76 @@ public class GradingManager : MonoBehaviour
         }
     }
 
+    // --- 分級邏輯區 ---------------------------------------------------------//
+    private void ShowCurrentBox()
+    {
+        BoxImage.sprite = _harvestedQueue[_gradingIndex].BoxSprite; // 需在 Data 新增此欄位
+        BoxAni.SetTrigger("SlideIn");
+    }
+
+    //分級判斷
+    private void HandleGradingInput()
+    {
+        if (_gradingIndex >= _harvestedQueue.Count) return;
+
+        string reqLevel = _harvestedQueue[_gradingIndex].Level;
+        // 1. 確認字典裡有這個等級的定義
+        if (_gradeKeys.ContainsKey(reqLevel) && _stampAni.ContainsKey(reqLevel))
+        {
+            // 2. 檢查玩家是否按下對應的 KeyCode
+            if (Input.GetKeyDown(_gradeKeys[reqLevel]))
+            {
+                // 3. 取得該等級對應的整數索引 (0-4)
+                stampIndex = _stampAni[reqLevel];
+
+                // 4. 根據索引啟動對應的 Image
+                Stamp[stampIndex].gameObject.SetActive(true);
+
+                StartCoroutine(ProcessStampSequence(reqLevel));
+                
+            }
+        }
+    }
+
+    IEnumerator ProcessStampSequence(string level)
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        Stamp[stampIndex].gameObject.SetActive(false);
+        BoxAni.SetTrigger("SlideOut");
+
+        yield return new WaitForSeconds(1.5f);
+
+        BoxAni.SetTrigger("Idel");
+        // 3. 切換下一個或結束
+        _gradingIndex++;
+        if (_gradingIndex < _harvestedQueue.Count)
+        {
+            ShowCurrentBox();
+        }
+        else
+        {
+            StartCoroutine(FinishGrading());
+
+        }
+    }
+
+    IEnumerator FinishGrading()
+    {
+        Debug.Log("分級完成，已切換至圖鑑模式。按下 L 可開啟書本。");
+        FinishUI.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene("Maimboo");
+
+        //刪一下序列
+        DDoLObj.GetComponent<ProgressTransferManager>().Day02HarvestedBamboos.Clear();
+
+    }
+    //-------------------------------------------------------------------------//
+
+
+    //---日記功能-----------------------------------------------------//
     /// <summary>
     /// 切換書本 UI 的顯示狀態
     /// </summary>

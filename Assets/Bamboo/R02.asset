@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: R02
   m_EditorClassIdentifier: 
-  StyleName: "\u597D\u5594"
+  StyleName: "\u9032...\u64CA"
   StyleID: R_02
-  StyleSprite: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
-  StyleForDiary: {fileID: 288492079102056441, guid: 7270aa1f8e2e10f45b6d538ea714b27e, type: 3}
+  StyleSprite: {fileID: -1402532480, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleForDiary: {fileID: -1402532480, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: -14726804602127102, guid: c2897009766186a4aa78ef973aee59c5, type: 3}
-  Grade: {fileID: 0}
-  Breif: 
-  Personality: 
-  Characteristic: 
-  ReasonShowUp: 
-  PlaceIntro: 
+  Grade: {fileID: 8457688128998239237, guid: 73b49a80a644be64b9d4aee3189800d5, type: 3}
+  BoxSprite: {fileID: 21300000, guid: 914adb0d32e239a45b173253b6d98c6a, type: 3}
+  Breif: "\u53F2\u6258\u9ED1\u65AF\u5340"
+  Personality: "\u5854\u5854\u5361\u6B38"
+  Characteristic: "\u901F\u901F\u59B9!"
+  ReasonShowUp: "\u592A\u4E2D\u4E8C\u4E86"
+  PlaceIntro: "\u9019...\u597D\u50CF\u662F\u4E00\u90E8\u5F88\u4E0D\u932F\u7684\u52D5\u6F2B\u5462!"
   Level: R

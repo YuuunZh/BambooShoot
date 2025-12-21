@@ -34,6 +34,7 @@ public class GradingManager : MonoBehaviour
     public Image[] Stamp;
     private int stampIndex;
     private int _gradingIndex = 0;
+    private bool _changingBox=false;
     // 定義各等級對應的按鍵
     private List<BambooStyleData> _harvestedQueue = new List<BambooStyleData>();
     private Dictionary<string, KeyCode> _gradeKeys = new Dictionary<string, KeyCode> {
@@ -42,6 +43,14 @@ public class GradingManager : MonoBehaviour
     private Dictionary<string, int> _stampAni = new Dictionary<string, int> {
         { "SSS", 0 }, { "SSR", 1}, { "SR",2 }, { "R", 3 }, { "N",4 }
     };
+
+
+    // 報價單資訊用
+    private Dictionary<string, int> GradePriceMap = new Dictionary<string, int> {
+    { "SSS", 1000 }, { "SSR", 700 }, { "SR", 400 }, { "R", 200 }, { "N", 100 }
+};
+    private int _finalSettlement=0;
+    private Dictionary<string, int> _sessionGradeCounts = new Dictionary<string, int>();
 
 
     [Header("UI 設定")]
@@ -72,7 +81,7 @@ public class GradingManager : MonoBehaviour
     private List<BambooStyleData> _diaryBamboos = new List<BambooStyleData>();
     private int _currentIndex = 0; // 目前顯示的竹筍索引
     private GameObject DDoLObj;
-
+    
     void Start()
     {
         DDoLObj = GameObject.Find("Manger(DDoL)");
@@ -89,7 +98,7 @@ public class GradingManager : MonoBehaviour
 
         FinishUI.SetActive(false);
 
-        ShowCurrentBox();
+        StartCoroutine(ShowCurrentBox());
 
         // 確保 DDoL Manager 存在
         if (ProgressTransferManager.Instance == null)
@@ -171,11 +180,7 @@ public class GradingManager : MonoBehaviour
     }
 
     // --- 分級邏輯區 ---------------------------------------------------------//
-    private void ShowCurrentBox()
-    {
-        BoxImage.sprite = _harvestedQueue[_gradingIndex].BoxSprite; // 需在 Data 新增此欄位
-        BoxAni.SetTrigger("SlideIn");
-    }
+    
 
     //分級判斷
     private void HandleGradingInput()
@@ -187,13 +192,20 @@ public class GradingManager : MonoBehaviour
         if (_gradeKeys.ContainsKey(reqLevel) && _stampAni.ContainsKey(reqLevel))
         {
             // 2. 檢查玩家是否按下對應的 KeyCode
-            if (Input.GetKeyDown(_gradeKeys[reqLevel]))
+            if (Input.GetKeyDown(_gradeKeys[reqLevel]) && !_changingBox)
             {
+                if (!_sessionGradeCounts.ContainsKey(reqLevel))
+                    _sessionGradeCounts[reqLevel] = 0;
+                _sessionGradeCounts[reqLevel]++;
+
                 // 3. 取得該等級對應的整數索引 (0-4)
                 stampIndex = _stampAni[reqLevel];
 
                 // 4. 根據索引啟動對應的 Image
                 Stamp[stampIndex].gameObject.SetActive(true);
+
+                //計算竹筍總價
+                _finalSettlement += GradePriceMap[reqLevel];
 
                 StartCoroutine(ProcessStampSequence(reqLevel));
                 
@@ -201,8 +213,19 @@ public class GradingManager : MonoBehaviour
         }
     }
 
+    IEnumerator ShowCurrentBox()
+    {
+        BoxImage.sprite = _harvestedQueue[_gradingIndex].BoxSprite; // 需在 Data 新增此欄位
+        BoxAni.SetTrigger("SlideIn");
+
+        yield return new WaitForSeconds(1f);
+
+        _changingBox = false;   //換箱子結束，unlock蓋章功能
+    }
+
     IEnumerator ProcessStampSequence(string level)
     {
+        _changingBox = true; //正在換箱子，lock蓋章功能
         yield return new WaitForSeconds(1.5f);
 
         Stamp[stampIndex].gameObject.SetActive(false);
@@ -215,7 +238,7 @@ public class GradingManager : MonoBehaviour
         _gradingIndex++;
         if (_gradingIndex < _harvestedQueue.Count)
         {
-            ShowCurrentBox();
+            StartCoroutine(ShowCurrentBox());
         }
         else
         {
@@ -226,14 +249,12 @@ public class GradingManager : MonoBehaviour
 
     IEnumerator FinishGrading()
     {
-        Debug.Log("分級完成，已切換至圖鑑模式。按下 L 可開啟書本。");
+        ProgressTransferManager.Instance.GradeCountSummary = new Dictionary<string, int>(_sessionGradeCounts);
+        ProgressTransferManager.Instance.FinalSettlement = _finalSettlement;
         FinishUI.SetActive(true);
         yield return new WaitForSeconds(2f);
 
-        SceneManager.LoadScene("Maimboo");
-
-        //刪一下序列
-        DDoLObj.GetComponent<ProgressTransferManager>().Day02HarvestedBamboos.Clear();
+        SceneManager.LoadScene("Settlement");
 
     }
     //-------------------------------------------------------------------------//

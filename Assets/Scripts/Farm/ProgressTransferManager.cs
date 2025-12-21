@@ -17,6 +17,16 @@ public class ProgressTransferManager : MonoBehaviour
     // 儲存玩家永久解鎖進度 (用於日記的解鎖狀態)
     public PlayerProgressData PlayerProgress { get; private set; }
 
+    public int FinalSettlement;
+
+    // 用來儲存本次結算的等級統計 (Key: 等級名稱, Value: 數量)
+    public Dictionary<string, int> GradeCountSummary = new Dictionary<string, int>();
+
+    // 建議統一在此管理單價，方便維護
+    public Dictionary<string, int> GradePriceMap = new Dictionary<string, int> {
+    { "SSS", 1000 }, { "SSR", 700 }, { "SR", 400 }, { "R", 200 }, { "N", 100 }
+};
+
 
     private void Awake()
     {
@@ -39,6 +49,7 @@ public class ProgressTransferManager : MonoBehaviour
     public void ClearSessionData()
     {
         Day02HarvestedBamboos.Clear();
+        FinalSettlement = 0;
     }
 
     // 從 PlayerPrefs 載入永久進度

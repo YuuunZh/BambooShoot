@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
   m_Name: SR02
   m_EditorClassIdentifier: 
-  StyleName: SR02
+  StyleName: "\u9F8D\u864E\u5802\u7B4D  "
   StyleID: SR_02
   StyleSprite: {fileID: 527878410, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   StyleForDiary: {fileID: 527878410, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: 106459473394109928, guid: 6c8e208a6d5381f4ba854a8b2ce8f17b, type: 3}
   Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
   BoxSprite: {fileID: 21300000, guid: 914adb0d32e239a45b173253b6d98c6a, type: 3}
-  Breif: 
-  Personality: 
-  Characteristic: 
-  ReasonShowUp: 
-  PlaceIntro: 
+  Breif: "\u9F8D\u864E\u5802\u5468\u908A  "
+  Personality: "\u7BE4\u4FE1\u8654\u8AA0  "
+  Characteristic: "\u897F\u65B9\u5EFA\u7BC9\u6771\u65B9\u4FE1\u4EF0  "
+  ReasonShowUp: "\u53D7\u4FE1\u4EF0\u85B0\u9676\u7684\u7AF9\u7B4D\u4F9B\u54C1  "
+  PlaceIntro: "\u300C\u9F8D\u864E\u5802\u300D\u70BA\u9F4B\u6559\u9F8D\u83EF\u6D3E\u4F5B\u5802\uFF0C\u878D\u5408\u897F\u65B9\u5EFA\u7BC9\u8207\u4F5B\u6559\u5350\u5B57\u5716\u9A30\u3002\u6230\u5F8C\u7531\u4FE1\u773E\u91CD\u5EFA\uFF0C\u78DA\u6728\u7D50\u69CB\u3001\u5750\u6771\u671D\u897F\uFF0C\u914D\u7F6E\u9418\u9F13\u6A13\u3001\u5167\u57D5\u8207\u84EE\u6C60\uFF0C\u5C55\u73FE\u4E2D\u897F\u5408\u74A7\u98A8\u683C\u8207\u9F4B\u6559\u5728\u4FD7\u4FEE\u884C\u7CBE\u795E\u3002"
   Level: SR

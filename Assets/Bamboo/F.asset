@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StyleName: "\u62C9\u4E0B\u53BB"
   StyleID: F
-  StyleSprite: {fileID: 2041144921, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
-  StyleForDiary: {fileID: 2041144921, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleSprite: {fileID: -1212320395597898711, guid: 0755614f86618084299974cb20d3bdcf, type: 3}
+  StyleForDiary: {fileID: -1212320395597898711, guid: 0755614f86618084299974cb20d3bdcf, type: 3}
   OriginalPlace: {fileID: 6129350190956564882, guid: 5f330a47f3206fe48bd7b69f273c5388, type: 3}
   Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
   BoxSprite: {fileID: 21300000, guid: 3a67978204fc6574c988c91b1bc209e6, type: 3}

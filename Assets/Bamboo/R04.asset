@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59736c6c20416f46a3e6176e1425518, type: 3}
+  m_Name: R04
+  m_EditorClassIdentifier: 
+  StyleName: "\u884C\u9727\u540A\u6A4B\u7B4D  "
+  StyleID: R_04
+  StyleSprite: {fileID: 2041144921, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  StyleForDiary: {fileID: 2041144921, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
+  OriginalPlace: {fileID: -14726804602127102, guid: c2897009766186a4aa78ef973aee59c5, type: 3}
+  Grade: {fileID: 8457688128998239237, guid: 73b49a80a644be64b9d4aee3189800d5, type: 3}
+  BoxSprite: {fileID: 21300000, guid: 914adb0d32e239a45b173253b6d98c6a, type: 3}
+  Breif: "\u5927\u5C0F\u6C34\u5751\u7684\u5169\u982D  "
+  Personality: "\u805A\u96C6\u4E32\u806F  "
+  Characteristic: "\u901A\u5E38\u5169\u5169\u4E00\u5C0D  "
+  ReasonShowUp: "\u70BA\u5404\u7A2E\u751F\u7269\u642D\u8D77\u6A4B\u6A11  "
+  PlaceIntro: "\u4ED6\u91CC\u9727\u57E4\u516C\u5712\u7531\u8FB2\u696D\u704C\u6E89\u57E4\u5858\u8F49\u578B\u70BA\u4F11\u61A9\u7A7A\u9593\uFF0C\u884C\u9727\u540A\u6A4B\u5728\u5730\u65B9\u5718\u9AD4\u5354\u529B\u4E0B\u8208\u5EFA\uFF0C\u9023\u7D50\u5D19\u4ED4\u6EAA\u5169\u5CB8\uFF0C\u65BC
+    102 \u5E74 12 \u6708\u6B63\u5F0F\u901A\u6A4B\uFF0C\u5C55\u73FE\u6C11\u9593\u53C3\u8207\u7CBE\u795E\u3002"
+  Level: R

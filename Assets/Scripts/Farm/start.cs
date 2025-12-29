@@ -9,7 +9,10 @@ public class start : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ProgressTransferManager.Instance.BgmChange(1);
             SceneManager.LoadScene(SceneName);
+        }
 
         if (Input.GetKeyDown(KeyCode.C))   //²MªÅPlayerPrefs
         {

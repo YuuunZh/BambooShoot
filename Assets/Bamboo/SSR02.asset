@@ -17,8 +17,8 @@ MonoBehaviour:
   StyleSprite: {fileID: 1277633289, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   StyleForDiary: {fileID: 1277633289, guid: ea6730652fa0ff24796a7bc4660c1f22, type: 3}
   OriginalPlace: {fileID: -6120499480382268198, guid: 4b26905f647eae6468efbf4d92ed7552, type: 3}
-  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
-  BoxSprite: {fileID: 21300000, guid: bb9c9dad7e9e7fa4ab124a6924fda388, type: 3}
+  Grade: {fileID: 231707006, guid: 3f146ff2b9f72d74b98be1c7ecbe9632, type: 3}
+  BoxSprite: {fileID: -768171581, guid: 78f392836549e664f871ea62f37d90f2, type: 3}
   Breif: "\u5076\u7684\u5BB6-\u6232\u5076\u6587\u5275\u5712\u5340  "
   Personality: "\u6975\u5EA6\u88AB\u52D5  "
   Characteristic: "\u751F\u9577\u5728\u6232\u5076\u4E4B\u4E2D  "

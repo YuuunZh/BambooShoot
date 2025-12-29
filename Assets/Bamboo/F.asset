@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StyleName: "\u62C9\u4E0B\u53BB"
   StyleID: F
-  StyleSprite: {fileID: -1212320395597898711, guid: 0755614f86618084299974cb20d3bdcf, type: 3}
-  StyleForDiary: {fileID: -1212320395597898711, guid: 0755614f86618084299974cb20d3bdcf, type: 3}
+  StyleSprite: {fileID: -1859559792, guid: 0268aa8cfa0df1a44830d9f52e1cc8b7, type: 3}
+  StyleForDiary: {fileID: -1859559792, guid: 0268aa8cfa0df1a44830d9f52e1cc8b7, type: 3}
   OriginalPlace: {fileID: 6129350190956564882, guid: 5f330a47f3206fe48bd7b69f273c5388, type: 3}
-  Grade: {fileID: 5152341829117266571, guid: d8bb8d79d16bd2747909b175f16c5303, type: 3}
-  BoxSprite: {fileID: 21300000, guid: 3a67978204fc6574c988c91b1bc209e6, type: 3}
-  Breif: "\u4E0D\u77E5\u9053"
+  Grade: {fileID: 870471637, guid: 3f146ff2b9f72d74b98be1c7ecbe9632, type: 3}
+  BoxSprite: {fileID: 1649292441, guid: a97c93a57c1c65e4bae59508b3965e59, type: 3}
+  Breif: "\u7B4D\u5931\u5927\u4E86"
   Personality: "\u6C92\u4EC0\u9EBC"
   Characteristic: "\u4E0D\u592A\u597D\u770B"
   ReasonShowUp: "\u9577\u7684\u6709\u9EDE\u5931\u8AA4"
-  PlaceIntro: "\u964F\u51FA\u53EF\u898B\uFF0C\u597D\u50CF\u662F\u6210\u9577\u904E\u7A0B\u4E2D\u6709\u9EDE\u5931\u8AA4\u7684\u6A23\u5B50"
+  PlaceIntro: "\u964F\u8655\u53EF\u898B\uFF0C\u597D\u50CF\u662F\u6210\u9577\u904E\u7A0B\u4E2D\u6709\u9EDE\u5931\u8AA4\u7684\u6A23\u5B50\uFF0C\u5927\u6982\u662F\u66EC\u592A\u591A\u592A\u967D\u82E6\u6389\u4E86\uFF0C\u4E0B\u6B21\u8A18\u5F97\u6309\u6642\u6F86\u6C34\u65BD\u80A5\uFF0C\u4E26\u4E14\u4E00\u5B9A\u8981\u5373\u6642\u84CB\u5E03\u5594!"
   Level: F

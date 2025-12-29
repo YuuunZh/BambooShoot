@@ -477,8 +477,7 @@ public class Manger : MonoBehaviour
         if (animTrigger != null)
         {
             // 1. 執行蓋布動畫
-            animTrigger.ClothAnimatorAni[0].SetTrigger("Back");
-            animTrigger.ClothAnimatorAni[1].SetTrigger("Back");
+            animTrigger.ClothAnimatorAni.SetTrigger("Back");
             ToGtadingAni.SetTrigger("Grading");
 
             // 2. 等待 2 秒讓動畫執行完畢

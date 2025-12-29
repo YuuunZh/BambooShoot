@@ -27,6 +27,9 @@ public class ProgressTransferManager : MonoBehaviour
     { "SSS", 1000 }, { "SSR", 700 }, { "SR", 400 }, { "R", 200 }, { "N", 100 }
 };
 
+    public AudioClip[] Bgms;
+
+    private AudioSource audio;
 
     private void Awake()
     {
@@ -78,5 +81,12 @@ public class ProgressTransferManager : MonoBehaviour
         Debug.Log("--- [DDoL Manager Save Log] ---");
         Debug.Log($"進度已存檔至 PlayerPrefs。JSON 字串長度: {json.Length}");
         Debug.Log("---------------------------");
+    }
+
+    public void BgmChange(int index)
+    {
+        audio = gameObject.GetComponent<AudioSource>();
+        audio.clip = Bgms[index];
+        audio.Play();
     }
 }

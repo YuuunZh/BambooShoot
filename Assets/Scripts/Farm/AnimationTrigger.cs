@@ -4,7 +4,7 @@ using static Manger;
 
 public class AnimationTrigger : MonoBehaviour
 {
-    public Animator[] ClothAnimatorAni;
+    public Animator ClothAnimatorAni;
     public Animator NextDayAni;
     public KeyCode key;
 
@@ -16,8 +16,7 @@ public class AnimationTrigger : MonoBehaviour
     {
         _manger = GameObject.Find("Farm(DoNotChangeContant)").GetComponent<Manger>();
 
-        ClothAnimatorAni[0].SetTrigger("Go");
-        ClothAnimatorAni[1].SetTrigger("Go");
+        ClothAnimatorAni.SetTrigger("Go");
     }
 
     // Update is called once per frame
@@ -28,8 +27,7 @@ public class AnimationTrigger : MonoBehaviour
             _hasClose = true;
 
             _manger.Day01HadCover = true;
-            ClothAnimatorAni[0].SetTrigger("Back");
-            ClothAnimatorAni[1].SetTrigger("Back");
+            ClothAnimatorAni.SetTrigger("Back");
 
             StartCoroutine(NextDayUI());
         }
@@ -56,8 +54,7 @@ public class AnimationTrigger : MonoBehaviour
         yield return new WaitForSeconds(2);   //第二日開布
 
         _manger.Daytimer.fillAmount = 0;
-        ClothAnimatorAni[0].SetTrigger("Go");
-        ClothAnimatorAni[1].SetTrigger("Go");
+        ClothAnimatorAni.SetTrigger("Go");
 
         yield return new WaitForSeconds(1);   //第二日出UI
         _manger.StartDay02HarvestUI();

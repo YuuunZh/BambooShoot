@@ -92,13 +92,20 @@ public class GradingManager : MonoBehaviour
         _harvestedQueue = ProgressTransferManager.Instance.Day02HarvestedBamboos
             .Where(b => b.Level != "F").ToList();
 
-        if (_harvestedQueue == null)
+        if (_harvestedQueue == null || _harvestedQueue.Count == 0)
+        {
             NoneBamBoo.SetActive(true);
-        else NoneBamBoo.SetActive(false);
+            // 如果沒有可分級的竹筍，直接準備結束，不啟動 ShowCurrentBox
+            StartCoroutine(NoneGrading());
+        }
+        else 
+        {
+            NoneBamBoo.SetActive(false);
 
-        FinishUI.SetActive(false);
+            FinishUI.SetActive(false);
 
-        StartCoroutine(ShowCurrentBox());
+            StartCoroutine(ShowCurrentBox());
+        } 
 
         // 確保 DDoL Manager 存在
         if (ProgressTransferManager.Instance == null)
@@ -133,7 +140,9 @@ public class GradingManager : MonoBehaviour
         }
         else
         {
+            NoneBamBoo.SetActive(true);
             Debug.LogWarning("未讀取到任何已採收的竹筍資料！");
+            StartCoroutine(NoneGrading());
         }
     }
 
@@ -254,9 +263,25 @@ public class GradingManager : MonoBehaviour
         FinishUI.SetActive(true);
         yield return new WaitForSeconds(2f);
 
+        ProgressTransferManager.Instance.BgmChange(0);
         SceneManager.LoadScene("Settlement");
 
     }
+
+    IEnumerator NoneGrading()
+    {
+        ProgressTransferManager.Instance.GradeCountSummary = new Dictionary<string, int>(_sessionGradeCounts);
+        ProgressTransferManager.Instance.FinalSettlement = _finalSettlement;
+
+        yield return new WaitForSeconds(5f);
+        FinishUI.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        ProgressTransferManager.Instance.BgmChange(0);
+        SceneManager.LoadScene("Settlement");
+
+    }
+
     //-------------------------------------------------------------------------//
 
 

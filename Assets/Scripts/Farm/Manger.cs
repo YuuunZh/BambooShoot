@@ -208,8 +208,9 @@ public class Manger : MonoBehaviour
             if (Day02)   
             {
                 HarvestDay = countTime + HarvestTime;     //時間內不採會醜掉
-                StartCoroutine(Day02Timer(Daytimer));    //該日計時
-                for(int i=0; i < bambooNum; i++)
+                Daytimer.gameObject.SetActive(false);
+                //StartCoroutine(Day02Timer(Daytimer));    //該日計時
+                for (int i=0; i < bambooNum; i++)
                 {
                     // 進入 Day02 時，先進行抽獎判定
                     if (!Bamboos[i].Day02Initialized)

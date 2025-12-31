@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StyleName: ???
   StyleID: _000_
-  StyleSprite: {fileID: 0}
-  StyleForDiary: {fileID: -7511576320742066962, guid: c6f68c8233e26884092b1b6ee3a5a782, type: 3}
+  StyleSprite: {fileID: 2025880485, guid: 50ac6b566206b1840a0eeffcd13f1263, type: 3}
+  StyleForDiary: {fileID: 2025880485, guid: 50ac6b566206b1840a0eeffcd13f1263, type: 3}
   OriginalPlace: {fileID: -4227056193323119671, guid: d9d400d0b407877479098361b42b6a19, type: 3}
   Grade: {fileID: -7766262853419003006, guid: 38932207c53e00846aed73ca3a5c9d6f, type: 3}
+  BoxSprite: {fileID: 0}
   Breif: ???
   Personality: ???
   Characteristic: ???

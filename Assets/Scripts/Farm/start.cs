@@ -16,14 +16,13 @@ public class start : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !_hasIntro)
+        if (Input.GetKeyDown(KeyCode.K) && !_hasIntro)
         {
             Intro.SetActive(true);
             _hasIntro=true;
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && _hasIntro)
+        else if (Input.GetKeyDown(KeyCode.K) && _hasIntro)
         {
-            ProgressTransferManager.Instance.BgmChange(1);
             SceneManager.LoadScene(SceneName);
         }
 

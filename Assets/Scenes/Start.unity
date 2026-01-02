@@ -767,10 +767,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u95DC\u4E0A\u5E03\uFF0C\u4E0B\u4E00\u6B65"
+  m_text: "\u53F3\u7BAD\u982D\uFF0C\u4E0B\u4E00\u6B65"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 068a434ce80089840bb2ef1abafecdef, type: 2}
-  m_sharedMaterial: {fileID: -3497234264054062110, guid: 068a434ce80089840bb2ef1abafecdef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfed111043602644a8883f1b061ed252, type: 2}
+  m_sharedMaterial: {fileID: -7117210020248867017, guid: cfed111043602644a8883f1b061ed252, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -794,8 +794,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -903,10 +903,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6253\u958B\u5E03\uFF0C\u4E0B\u4E00\u6B65"
+  m_text: "\u53F3\u7BAD\u982D\uFF0C\u4E0B\u4E00\u6B65"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 068a434ce80089840bb2ef1abafecdef, type: 2}
-  m_sharedMaterial: {fileID: -3497234264054062110, guid: 068a434ce80089840bb2ef1abafecdef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cfed111043602644a8883f1b061ed252, type: 2}
+  m_sharedMaterial: {fileID: -7117210020248867017, guid: cfed111043602644a8883f1b061ed252, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -930,8 +930,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d132a1b7cf130134e960830344777ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: Maimboo
+  SceneName: Teach_Bamboo
   Intro: {fileID: 805870493}
 --- !u!212 &1859344471
 SpriteRenderer:

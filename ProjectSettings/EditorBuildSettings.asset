@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Start.unity
     guid: 4db7ef622aad64249bc6dac2e41889c9
   - enabled: 1
+    path: Assets/Scenes/Teach_Bamboo.unity
+    guid: c8f85740198d27e4baf161304537e3da
+  - enabled: 1
     path: Assets/Scenes/Maimboo.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
@@ -17,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settlement.unity
     guid: ffd354ff0b97e454cb2b61746359bf99
-  - enabled: 1
-    path: Assets/Scenes/Teach_Bamboo.unity
-    guid: c8f85740198d27e4baf161304537e3da
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

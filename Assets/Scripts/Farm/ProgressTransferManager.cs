@@ -89,4 +89,13 @@ public class ProgressTransferManager : MonoBehaviour
         audio.clip = Bgms[index];
         audio.Play();
     }
+
+    public void ResetAllData()
+    {
+        Day02HarvestedBamboos.Clear();
+        FinalSettlement = 0;
+        GradeCountSummary.Clear();
+
+        PlayerProgress = new PlayerProgressData(); // √ˆ¡‰
+    }
 }

@@ -32,6 +32,8 @@ public class GradingManager : MonoBehaviour
     public GameObject FinishUI;
     public Animator BoxAni;
     public Image[] Stamp;
+    public GameObject BookHint;
+    public Animator ChiefHint;
     private int stampIndex;
     private int _gradingIndex = 0;
     private bool _changingBox=false;
@@ -197,6 +199,11 @@ public class GradingManager : MonoBehaviour
         if (_gradingIndex >= _harvestedQueue.Count) return;
 
         string reqLevel = _harvestedQueue[_gradingIndex].Level;
+
+        if (!_gradeKeys.ContainsKey(reqLevel)) return;
+
+        KeyCode correctKey = _gradeKeys[reqLevel];
+
         // 1. 確認字典裡有這個等級的定義
         if (_gradeKeys.ContainsKey(reqLevel) && _stampAni.ContainsKey(reqLevel))
         {
@@ -217,7 +224,15 @@ public class GradingManager : MonoBehaviour
                 _finalSettlement += GradePriceMap[reqLevel];
 
                 StartCoroutine(ProcessStampSequence(reqLevel));
-                
+
+            }
+        }
+        foreach (var pair in _gradeKeys)
+        {
+            if (pair.Value != correctKey && Input.GetKeyDown(pair.Value))
+            {
+                ChiefHint.SetTrigger("Go");
+                return;
             }
         }
     }
@@ -291,10 +306,13 @@ public class GradingManager : MonoBehaviour
     /// </summary>
     private void ToggleBookUI()
     {
-        if (BookUI != null)
-        {
-            BookUI.SetActive(!BookUI.activeSelf);
-        }
+        if (BookUI == null || BookHint == null) return;
+
+        bool showBookUI = !BookUI.activeSelf;
+
+        BookUI.SetActive(showBookUI);
+        BookHint.SetActive(!showBookUI);
+
     }
 
     /// <summary>

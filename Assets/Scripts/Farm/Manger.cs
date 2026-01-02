@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 
 /// <summary>
 /// 竹筍本人與狀態的顯示與動作
@@ -66,16 +67,20 @@ public class Manger : MonoBehaviour
     public Image Daytimer;
     public bool Day01=true,Day02=false;
     public string NextScene;
-
+    public AnimationTrigger AniTrigger;
 
 
     public float countTime = 0, Day01Time = 15;    //Day01Time:第一天只給15秒動作
     public bool Day01HadCover=false;
     public Animator ToGtadingAni;
+    [HideInInspector]
+    public bool _day01Open = false;
+    [HideInInspector]
+    public bool _day02Open = false;
 
     int waitTime = 3,HarvestTime=8;   //waitTime:每個澆水&施肥動作只給3秒 ; HarvestTime:採收只給8秒動作
     float bambooNum,HarvestDay;
-    bool gameStop=false, hasFilled = false;    //hasFilled:UIStateFill
+    bool gameStop=true ,hasFilled = false;    //hasFilled:UIStateFill
 
     
     void Start()
@@ -110,6 +115,35 @@ public class Manger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!_day01Open && Input.GetKeyDown(KeyCode.Space))
+        {
+            AniTrigger.ClothAnimatorAni.SetTrigger("Go");
+            _day01Open=true;
+            gameStop = false;
+        }
+        else if (_day01Open && Input.GetKeyDown(KeyCode.Space) && !Day02) //第一日蓋布換日
+        {
+            print("in");
+            Day01HadCover = true;
+            Day02=true;
+            AniTrigger.ClothAnimatorAni.SetTrigger("Back");
+            StartCoroutine(AniTrigger.NextDayUI());
+        }
+        //第一日換日UI自己下來
+        else if(countTime > Day01Time + 1f && !Day01HadCover && !Day02)
+        {
+            Debug.Log("換日");
+            Day02=true;
+            StartCoroutine(AniTrigger.NextDayUI());
+        }
+        else if (Day02 && !_day02Open && Input.GetKeyDown(KeyCode.Space))  //第2日開布判斷
+        {
+            AniTrigger.ClothAnimatorAni.SetTrigger("Go");
+            _day02Open = true;
+        }
+
+
+
         if (!gameStop)   //Game is running
         {
             countTime += Time.deltaTime;   //各筍子計時
@@ -205,7 +239,7 @@ public class Manger : MonoBehaviour
             }
 
 
-            if (Day02)   
+            if (Day02 && _day02Open)   
             {
                 HarvestDay = countTime + HarvestTime;     //時間內不採會醜掉
                 Daytimer.gameObject.SetActive(false);
